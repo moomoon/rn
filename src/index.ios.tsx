@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import OOXX from "./components/OOXX/index"
 
 import HelloWorld from "./components/HelloWorld/index";
 
@@ -25,8 +26,9 @@ export default class App extends Component<Props, State> {
                     Press Cmd+R to reload, {"\n"}
                     Cmd+D or shake for dev menu
                 </Text>
+                <OOXX.List />
 
-                <HelloWorld style={styles.helloworld} max={10} />
+                {/*<HelloWorld style={styles.helloworld} max={10} />*/}
             </View>
         );
     }

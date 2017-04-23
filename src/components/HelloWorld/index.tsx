@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
+import { OOXXPage, OOXXComment } from "ooxx/ooxx"
 
 // See src/declarations.d.ts
 import Button from "react-native-button";
@@ -26,6 +27,11 @@ export default class HelloWorld extends Component<Props, State> {
     };
 
     onPress = () => {
+        fetch('https://jandan.net/?oxwlxojflwblxbsapi=jandan.get_ooxx_comments&page=1')
+        .then(response => response.json() as Promise<OOXXPage>)
+        .then((data) => console.log(`pageCount = ${data.page_count}`))
+        .catch(() => this.setState({ counter: 0}));
+        console.log("on press");
         const counter = this.state.counter + 1;
         if (counter < this.props.max) {
             return this.setState({ counter });
