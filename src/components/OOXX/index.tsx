@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, Image,ImageURISource, ListView } from "react-native";
+import {ImageViewer} from 'react-native-image-fit';
+
 
 namespace OOXX {
 
@@ -66,11 +68,6 @@ namespace OOXX {
                     return this.setState({ page: data as Page });
                 }
                 );
-            // .catch(() => this.setState({ counter: 0}));
-            // const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-            // this.state = {
-            //     dataSource: ds.cloneWithRows(['row 1', 'row 2']),
-            // };
         }
         componentWillUnmount() {
 
@@ -80,22 +77,13 @@ namespace OOXX {
             console.log(this.state);
             return (
                 <ListView
-                    dataSource={
-                        //this.ds.cloneWithRows(["test1", "test2"])
-                        this.state && this.state.page && this.ds.cloneWithRows(this.state.page.comments) || this.ds
-                    }
-                    renderRow={(comment: Comment) => {
-                        
+                    dataSource={this.state && this.state.page && this.ds.cloneWithRows(this.state.page.comments) || this.ds}
+                    renderRow={(comment : Comment) => {
                     console.log(comment.pics[0]);
-                    //<Text> "test" </Text>
-                    
-                    return <Image 
-
-          style={{width: 100, height: 50}}
-                    source={{ uri: comment.pics[0].replace("http", "https") } as ImageURISource} />
-                    }
-                    }
-                />
+                    return (<ImageViewer source={{ uri: comment.pics[0].replace("http", "https") } as ImageURISource}
+                                        mainImageProps={{ resizeMode: 'contain' }}
+                                        zoomedImageProps={{ resizeMode: 'contain' }}/>);
+                }}/>
             );
         }
     }
