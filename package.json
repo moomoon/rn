@@ -8,13 +8,16 @@
     "android": "adb reverse tcp:8081 tcp:8081 && node node_modules/react-native/local-cli/cli.js run-android",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "prebuild": "node node_modules/.bin/rimraf build",
-    "build": "tsc"
+    "build": "tsc --strictNullChecks"
   },
   "dependencies": {
+    "install": "^0.8.8",
+    "npm": "^4.5.0",
     "react": "^15.4.2",
     "react-native": "0.41.2",
     "react-native-button": "^1.8.2",
-    "react-native-image-fit": "^0.9.10"
+    "react-native-image-fit": "^0.9.10",
+    "react-native-tabbar": "^1.0.0"
   },
   "devDependencies": {
     "react-native-sm-transformer": "^1.0.2",

@@ -53,7 +53,7 @@ namespace OOXX {
     }
 
     interface State {
-        page?: Page
+        page: Page | null
     }
 
     export class List extends Component<Props, State> {
