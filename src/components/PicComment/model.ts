@@ -31,8 +31,8 @@ export interface Comment {
     readonly videos: Array<String>
 }
 
-export function page(count: number = 1): Promise<Page> {
-    return fetch(`http://jandan.net/?oxwlxojflwblxbsapi=jandan.get_pic_comments&page=${count}`).then(body => body.json() as Promise<Page>)
+function page(count: number = 1): Promise<Page> {
+    return fetch(`https://jandan.net/?oxwlxojflwblxbsapi=jandan.get_pic_comments&page=${count}`).then(body => body.json() as Promise<Page>).catch(console.log);
 }
 
 export class PageContainer {
@@ -40,6 +40,9 @@ export class PageContainer {
     onPageRefreshed: (_: PageContainer, __: "head" | "tail") => void = function (_, __) {};
     private headRequest: Promise<any> | null = null;
     private tailRequest: Promise<any> | null = null;
+    constructor(onPageRefreshed: (_: PageContainer, __: "head" | "tail") => void) {
+        this.onPageRefreshed = onPageRefreshed;
+    }
     private headPageNumber(): number {
         if (this.pages.length == 0) { return 1; }
         let beforeHead = this.pages[0].current_page - 1;
@@ -59,10 +62,12 @@ export class PageContainer {
         if (null != this.headRequest) { return false; }
         this.headRequest = page(this.headPageNumber())
         .then(page => {
+            console.log(`head = ${page}`)
             this.pages = [page];
             this.onPageRefreshed(this, "head");
             this.headRequest = null;
         })
+        .catch(console.log);
         return true;
     }
     requestTail(): boolean {

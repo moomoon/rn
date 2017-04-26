@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import OOXX from "./components/OOXX/index"
+import {List} from "./components/PicComment/index"
 
 import HelloWorld from "./components/HelloWorld/index";
 
@@ -16,7 +16,7 @@ export default class App extends Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.welcome}>
+                {/*<Text style={styles.welcome}>
                     Welcome to React Native
                 </Text>
                 <Text style={styles.instructions}>
@@ -25,8 +25,8 @@ export default class App extends Component<Props, State> {
                 <Text style={styles.instructions}>
                     Press Cmd+R to reload, {"\n"}
                     Cmd+D or shake for dev menu
-                </Text>
-                <OOXX.List />
+                </Text>*/}
+                <List />
 
                 {/*<HelloWorld style={styles.helloworld} max={10} />*/}
             </View>
@@ -57,4 +57,5 @@ const styles = StyleSheet.create({
     helloworld: {
         marginVertical: 15,
     } as React.ViewStyle,
+    
 });
